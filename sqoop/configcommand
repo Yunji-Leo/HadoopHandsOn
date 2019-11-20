@@ -1,0 +1,3 @@
+GRANT ALL PRIVILEGES ON movielens.* to ''@'localhost' IDENTIFIED BY 'pass'
+
+sqoop import --connect jdbc:mysql://localhost.movielens --username root -P --driver com.mysql.jdbc.Driver --table movies -m 1
