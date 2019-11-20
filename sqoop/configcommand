@@ -4,3 +4,4 @@ sqoop import --connect jdbc:mysql://localhost.movielens --username root -P --dri
 
 sudo -u hive sqoop import --connect jdbc:mysql://localhost/movielens --username root -P --driver com.mysql.jdbc.Driver --table movies -m 1 --hive-import
 
+sqoop export --connect jdbc:mysql://localhost/movielens -m 1 --username root -P --driver com.mysql.jdbc.Driver --table exported_movies --export-dir /warehouse/tablespace/managed/hive/movies/delta_0000002_0000002_0000 --input-fields-terminated-by '\0001'
