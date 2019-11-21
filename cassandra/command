@@ -1,0 +1,31 @@
+python -V
+yum update
+yum install scl-utils
+yum install centos-release-scl-rh
+yum install python27
+scl enable python27 bash
+
+cd /etc/yum.repos.d
+vim datastax.repo
+
+yum install dsc30
+
+pip install cqlsh
+
+service cassandra start
+
+vim /etc/cassandra/conf/cassandra.yaml ---> start_rpc: true
+cqlsh --cqlversion="3.4.0"
+
+
+CREATE KEYSPACE movielens WITH replication = {'class': 'SimpleStrategy', 'replication_factor':'1'} AND durable_writes = true;
+USE movielens;
+CREATE TABLE users (user_id int, age int, gender text, occupation text, zip text, PRIMARY KEY (user_id));
+DESCRIBE TABLE users
+
+
+### spark-submit --packages datastax:spark-cassandra-connector:2.0.0-M2-s_2.11 CassandraSpark.py
+### java.lang.NoClassDefFoundError: org/apache/spark/sql/catalyst/package$ScalaReflectionLock$
+https://github.com/datastax/spark-cassandra-connector
+https://dl.bintray.com/spark-packages/maven/datastax/spark-cassandra-connector/
+spark-submit --packages datastax:spark-cassandra-connector:2.4.0-s_2.11 CassandraSpark.py
