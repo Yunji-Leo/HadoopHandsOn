@@ -1,0 +1,14 @@
+cd /var/lib/ambari-server/resources/stacks
+cd HDP/3.0
+
+git clone https://github.com/nikunjness/mongo-ambari.git
+
+sudo service ambari-server restart
+
+ambari->add service->MongoDB
+
+pip install pymongo
+
+https://docs.mongodb.com/spark-connector/master/
+https://mvnrepository.com/artifact/org.mongodb.spark/mongo-spark-connector
+spark-submit --packages org.mongodb.spark:mongo-spark-connector_2.11:2.4.1 MongoSpark.py
